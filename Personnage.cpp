@@ -9,7 +9,7 @@ Personnage::Personnage() {
 	setHealth(80);
 	setAttack(100);
 	setDefense(20);
-	setDescription("Naine de la montagne, Gerare est partie en quête d'ennemis puissant et a rencontre ses camarades en chemin.")
+	setDescription("Naine de la montagne, Gerare est partie en quête d'ennemis puissant et a rencontre ses camarades en chemin.");
 }
 
 string Personnage::getName()

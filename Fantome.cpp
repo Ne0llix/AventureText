@@ -6,7 +6,7 @@ Fantome::Fantome() {
 	setHealth(80);
 	setAttack(100);
 	setDefense(20);
-	setDescription("Naine de la montagne, Gerare est partie en quête d'ennemis puissant et a rencontre ses camarades en chemin.")
+	setDescription("Naine de la montagne, Gerare est partie en quête d'ennemis puissant et a rencontre ses camarades en chemin.");
 }
 
 Element Fantome::getElementType()
@@ -37,6 +37,36 @@ std::string Fantome::getElementType_ToString()
 void Fantome::setElementType(Element e)
 {
 	elementType = e;
+}
+
+void Fantome::setElementType(std::string userElement)
+{
+	if (userElement == "normal") {
+		elementType = Element::normal;
+	}
+	else if (userElement == "water") {
+		elementType = Element::water;
+
+	}
+	else if (userElement == "ice") {
+		elementType = Element::ice;
+
+	}
+	else if (userElement == "fire") {
+		elementType = Element::fire;
+
+	}
+	else if (userElement == "sand") {
+		elementType = Element::sand;
+
+	}
+	else if (userElement == "boss") {
+		elementType = Element::boss;
+
+	}
+	else {
+		elementType = Element::normal;
+	}
 }
 
 int Fantome::getSize()

@@ -1,5 +1,5 @@
 #include <iostream>
-//#include <Personnage.h>
+#include "Personnage.h"
 
 using namespace std;
 
@@ -22,11 +22,11 @@ int main() {
 		cout << "Entrez 1 pour demarrer le jeu" << endl;
 		cin >> demarrage;
 	}
-	suite();
+	//suite();
 
 	cout << "Vous êtes un groupe de 4 chasseur de Fantôme : Jean le tank, Remi le mage, Xavier l'assassin et Salim le bard" << endl;
 	cout << "Votre but est de traverser les etages et de debarasser cet hôtel des spectres qui s'y trouve" << endl;
-	suite();
+	//suite();
 	cout << "Apres une dizaines de minutes de route votre equipe de chasseur de fantomes descendit de leur voiture d’urgence et decouvrit le grand batiments qui, en quelques heure, a ete ravager part la horde de fantomes qui occupent maintenant les lieux."<< endl;
 	cout << "L’équipe s’avance vers le hall d’entrer et entre dans le batiments. Les lumieres sont hors services et l’air est lourde, charger de peur et de plasma. "<< endl;
 
