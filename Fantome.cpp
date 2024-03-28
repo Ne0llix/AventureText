@@ -21,6 +21,8 @@ std::string Fantome::getElementType_ToString()
 		return "normal";
 	case Element::water:
 		return "water";
+	case Element::ice:
+		return "ice";
 	case Element::fire:
 		return "fire";
 	case Element::sand:
@@ -32,9 +34,9 @@ std::string Fantome::getElementType_ToString()
 	}
 }
 
-void Fantome::setType(string t)
+void Fantome::setElementType(Element e)
 {
-	type = t;
+	elementType = e;
 }
 
 int Fantome::getSize()

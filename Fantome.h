@@ -8,6 +8,7 @@ using namespace std;
 enum class Element {
 	normal,
 	water,
+	ice,
 	fire,
 	sand,
 	boss
