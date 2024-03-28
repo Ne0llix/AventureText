@@ -1,7 +1,7 @@
 #include "Fantome.h"
 
 Fantome::Fantome() {
-	setType("Sand");
+	setElementType("Sand");
 	setSize(100);
 	setHealth(80);
 	setAttack(100);
@@ -9,9 +9,27 @@ Fantome::Fantome() {
 	setDescription("Naine de la montagne, Gerare est partie en quête d'ennemis puissant et a rencontre ses camarades en chemin.")
 }
 
-string Fantome::getType()
+Element Fantome::getElementType()
 {
-	return type;
+	return elementType;
+}
+
+std::string Fantome::getElementType_ToString()
+{
+	switch (elementType) {
+	case Element::normal:
+		return "normal";
+	case Element::water:
+		return "water";
+	case Element::fire:
+		return "fire";
+	case Element::sand:
+		return "sand";
+	case Element::boss:
+		return "boss";
+	default:
+		return "normal";
+	}
 }
 
 void Fantome::setType(string t)

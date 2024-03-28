@@ -5,11 +5,18 @@ using namespace std;
 
 
 //Nom, role; genre, age, size, description, PV, ATK, DEF
+enum class Element {
+	normal,
+	water,
+	fire,
+	sand,
+	boss
+};
 
 class Fantome
 {
 private:
-	string type;
+	Element elementType;
 	int health;
 	int attack;
 	int defense;
@@ -19,8 +26,10 @@ private:
 public:
 	Fantome();
 
-	string getType();
-	void setType(string t);
+	Element getElementType();
+	std::string getElementType_ToString();
+	void setElementType(Element e);
+	void setElementType(std::string userElement);
 
 	int getSize();
 	void setSize(int s);
