@@ -1,5 +1,7 @@
 #include <iostream>
-#include "Personnage.h"
+//#include "Personnage.h"
+#include "Inventaire.h"
+#include <vector>
 
 using namespace std;
 
@@ -9,15 +11,23 @@ using namespace std;
 //Fonction Cuisine en tapant "KOUIZINE"
 //Faire fonction combat avec (ATK, SOIN, ATK MAG, CHANT, FUITE)
 //Faire un GAME OVER
+Inventaire i1("Canette de Soda", 1, 20);
+Inventaire i2("barre de cereale", 1, 25);
+Inventaire i3("Paquet de Gateaux", 1, 30);
+Inventaire i4("Gateaux", 3, 10);
+Inventaire i5("Popcorn", 4, 10);
+std::vector<Inventaire*> Inventory;
 int demarrage = 0;
 int piece;
 string continuer;
 int personnage;
 int ActualFloor = 1;
+int ChoosenItem;
+bool FightAction;
 //Fonction Servant au joueur de passer à la suite du jeu
 void suite() {
 	while (continuer != "suite") {
-		cout << "Taper 'suite' pour continuer" << endl;
+		cout << "Tapez 'suite' pour continuer" << endl;
 		cin >> continuer;
 		if (continuer == "suite") {
 			system("cls");
@@ -33,67 +43,82 @@ void EndFloor() {
 
 	}
 	else if (ActualFloor == 2) {
-		cout << "Fin etage 2" << endl;
+		cout << "La temperature remonte de cinq degres Celsius et la neige fond a vue d oeil. L equipe s avance vers les escaliers . " << endl;
 	}
 	else if (ActualFloor == 2) {
-		cout << "Fin etage 3" << endl;
+		cout << "les chasseurs de fantomes sortent de la derniere piece, il remarque que le sable commence a s’evaporer  par le plancher cependant l escalier reste inaccessible " << endl;
 	}
 	else if (ActualFloor == 4) {
-		cout << "Fin etage 4" << endl;
+		cout << "la chaleur commence a s’attenuer, neanmoins les flamme ont rendu l’escalier principale trop fragile pour que l’on puis l’utiliser " << endl;
 	}
 }
 //Tout les Textes et objet de la Piece 1 en fonction de l'étage
 void TxtRoom1() {
 	if (ActualFloor == 1) {
 		cout << "l equipe ouvre le porte de la premiere chambre du pallier, ils entrent en pataugent dans l eau. Ils ce rendent compte que le liquide jaillit du sol de la piece quand tout d un coup  la porte ce claque derriere eux." << endl << "Un etre fait de plasma apparait ! " << endl;
+		//combat
 	}
 	else if (ActualFloor == 2) {
-		cout << "l’equipe ouvre le porte, Un vent glaciale sabbat sur eux. Le lieux est completement givre et des cristaux ce forme au plafond. Un bruit attire leurs regards, quand tout d’un coup  la porte ce claque derrière eux." << endl << "Un etre fait de plasma apparait ! " << endl;
+		cout << "Les chasseurs de fantomes entrent dans la piece, sur une table ils trouvent un paquet de gateaux." << endl;
+		Inventory.push_back(&i3);
 	}
 	else if (ActualFloor == 3) {
 		cout << "l’equipe rentre dans la piece avec difficulte, le sable genant la progression. Un drole de sentiment s’empare des chasseurs quand soudain la porte ce ferme violemment derriere eux." << endl << "Un etre fait de plasma apparait !" << endl;
+		//combat
 	}
 	else if (ActualFloor == 4) {
 		cout << "les chasseurs rentre dans la piece il trouve un cle parterre et ressorte" << endl;
+		//combat
 	}
 }
 //Tout les Textes et objet de la Piece 2
 void TxtRoom2() {
 	if (ActualFloor == 1) {
 		cout << "les chasseurs de fantomes entrent dans la chambre numero deux, dans une table de chevet ils trouvent un barre de cereale " << endl;
+		Inventory.push_back(&i2);
 	}
 	else if (ActualFloor == 2) {
 		cout << "l’equipe ouvre le porte, Un vent glaciale sabbat sur eux. Le lieux est completement givre et des cristaux ce forme au plafond. Un bruit attire leurs regards, quand tout d’un coup  la porte ce claque derrière eux." << endl << "Un etre fait de plasma apparait !" << endl;
+		//combat
 	}
 	else if (ActualFloor == 3) {
 		cout << "Une table plein de petit gateaux ce trouve au milieux de la piece, seulement trois ne sont pas recouvert de sable. " << endl;
+		Inventory.push_back(&i4);
 	}
 	else if (ActualFloor == 4) {
 		cout << "l’equipe rentre dans la chambre, quatre paquet de pop corn sont place sur une table en feu, des petit « pop » « pop » arrives au oreilles des chasseurs, ils prennent les paquet pret et ressorte. " << endl;
+		Inventory.push_back(&i5);
 	}
 }
 //Tout les Textes et objet de la Piece 3
 void TxtRoom3() {
 	if (ActualFloor == 1) {
 		cout << "l equipe ouvre le porte de la troisieme chambre du pallier, ils entrent en pataugent dans l eau. Ils ce rendent compte que le liquide coule des murs de la piece quand tout d un coup  la porte ce claque derriere eux." << endl << "Un etre fait de plasma apparait ! " << endl;
+		//combat
 	}
 	else if (ActualFloor == 2) {
 		cout << "l’equipe ouvre le porte, de la neige tombe dans la salle. Le lieux est completement enneiger. La porte ce ferme violemment derriere eux." << endl << "Un etre fait de plasma apparait ! " << endl;
+		//combat
 	}
 	else if (ActualFloor == 3) {
 		cout << "les chasseurs fouille la chambre en quete d’objet interessant, dans une armoire il trouve un cle et sorte de la piece " << endl;
+		//combat
 	}
 	else if (ActualFloor == 4) {
 		cout << "l’equipe ouvre le porte, des flamme leurs brule legerement les habits ,le lieux est completement en feu. La porte ce ferme violemment derriere eux." << endl << "Un etre fait de plasma apparait !" << endl;
+		//combat
 	}
 }
 //Tout les Textes et objet de la Piece 4
 void TxtRoom4() {
 	if (ActualFloor == 3) {
 		cout << "les chasseurs rentre dans la pièce, de la poussière vole dans l’air et commence a former un tempête. La porte claque violemment derrière l’équipe." << endl << "Un etre fait de plasma apparait ! " << endl;
+		//combat
 	}
+
 	else if (ActualFloor == 4) {
 		cout << "l’equipe ouvre le porte, de la lave coule des murs, la chaleurs est etouffante. L’equipe tentent de sortir quand la porte ce ferme violemment derriere eux." << endl << "Un etre fait de plasma apparait ! " << endl;
+		//combat
 	}
 }
 //Choix de la Piece à visiter
@@ -173,8 +198,38 @@ void Floor() {
 	}
 	EndFloor();
 }
+//L'inventaire de l'équipe en temps réel
+void GestionInventaire() {
+	do {
+		cout << "Quelle item voulez vous utiliser ? :" << endl;
+		for (int i = 0; i < Inventory.size(); i++) {
+			cout << i + 1 << "." << Inventory[i]->GetName() << " x" << Inventory[i]->GetNombre() << " " << Inventory[i]->GetSoin() << "PV" << "    ";
+
+		}
+		cout << Inventory.size() + 1 << "." << "ou plus pour revenir en arriere" << endl;
+		cin >> ChoosenItem;
+	} while (ChoosenItem < 1);
+
+
+
+	ChoosenItem -= 1;
+	if (ChoosenItem == Inventory.size()) {
+		FightAction = false;
+		return;
+	}
+	else {
+		Inventory[ChoosenItem]->UseObject();
+		cout << "Vous avez utiliser " << Inventory[ChoosenItem]->GetName() << " et avez recuperer " << Inventory[ChoosenItem]->GetSoin() << "PV" << endl;
+		FightAction = true;
+	}
+
+}
+
 
 int main() {
+
+
+
 	while (demarrage != 1) {
 		cout << "Bienvenue dans :" << endl;
 		//insérer le titre et le logo
@@ -205,11 +260,3 @@ int main() {
 
 	return 0;
 }
-
-
-/*void defeat() {
-	//Si tout les personnage <=0 alors
-	cout << "Vous avez perdu" << endl;
-}*/
-
-
