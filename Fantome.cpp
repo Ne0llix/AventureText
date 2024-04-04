@@ -1,12 +1,12 @@
 #include "Fantome.h"
 
-Fantome::Fantome() {
-	setElementType("Sand");
-	setSize(100);
-	setHealth(80);
-	setAttack(100);
-	setDefense(20);
-	setDescription("Naine de la montagne, Gerare est partie en quête d'ennemis puissant et a rencontre ses camarades en chemin.");
+Fantome::Fantome(string e, int s, int pv, int atk, int def, string d) {
+	setElementType(e);
+	setSize(s);
+	setHealth(pv);
+	setAttack(atk);
+	setDefense(def);
+	setDescription(d);
 }
 
 Element Fantome::getElementType()

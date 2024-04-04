@@ -1,15 +1,17 @@
 #include "Personnage.h"
 
-Personnage::Personnage() {
-	setName("Gerare");
-	setRole("Guerriere");
-	setGender("Femme");
-	setAge(118);
-	setSize(100);
-	setHealth(80);
-	setAttack(100);
-	setDefense(20);
-	setDescription("Naine de la montagne, Gerare est partie en quête d'ennemis puissant et a rencontre ses camarades en chemin.");
+Personnage::Personnage(string n, string r, string g, int a, int s, int pv, int atk, int atkspe, string atkspen, int def, string d) {
+	setName(n); 
+	setRole(r);
+	setGender(g);
+	setAge(a);
+	setSize(s);
+	setHealth(pv);
+	setAttack(atk);
+	setAttackSpecial(atkspe);
+	setAttackSpecialName(atkspen);
+	setDefense(def);
+	setDescription(d);
 }
 
 string Personnage::getName()
@@ -80,6 +82,26 @@ int Personnage::getAttack()
 void Personnage::setAttack(int atk)
 {
 	attack = atk;
+}
+
+int Personnage::getAttackSpecial()
+{
+	return attackSpecial;
+}
+
+void Personnage::setAttackSpecial(int atkspe)
+{
+	attackSpecial = atkspe;
+}
+
+string Personnage::getAttackSpecialName()
+{
+	return attackSpecialName;
+}
+
+void Personnage::setAttackSpecialName(string atkspen)
+{
+	attackSpecialName = atkspen;
 }
 
 int Personnage::getDefense()

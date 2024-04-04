@@ -14,13 +14,15 @@ private:
 	string gender;
 	int health;
 	int attack;
+	int attackSpecial;
+	string attackSpecialName;
 	int defense;
 	int age;
 	int size;
 	string description;
 
 public:
-	Personnage();
+	Personnage(string n, string r, string g, int a, int s, int pv, int atk, int atkspe, string atkspen, int def, string d);
 
 	string getName();
 	void setName(string n);
@@ -43,6 +45,12 @@ public:
 	int getAttack();
 	void setAttack(int atk);
 
+	int getAttackSpecial();
+	void setAttackSpecial(int atkspe);
+
+	string getAttackSpecialName();
+	void setAttackSpecialName(string atkspen);
+	 
 	int getDefense();
 	void setDefense(int def);
 

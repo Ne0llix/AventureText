@@ -25,7 +25,7 @@ private:
 	string description;
 
 public:
-	Fantome();
+	Fantome(string e, int s, int pv, int atk, int def, string d);
 
 	Element getElementType();
 	std::string getElementType_ToString();
