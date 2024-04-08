@@ -43,7 +43,7 @@ int ChoosenItem;
 int Ennemi;
 int EnnemiNb;
 int Character;
-bool FightAction;
+bool FightAction= false;
 int FightChoice;
 
 //Fonction Servant au joueur de passer à la suite du jeu
@@ -262,7 +262,7 @@ void Combat() {
 			GestionInventaire();
 		}
 		else if (FightChoice == 3) {
-			cout << "Vous faites votre attaque speciale " 
+			cout << "Vous faites votre attaque speciale ";
 		}
 		else if (FightChoice == 4) {
 			if (EnnemiNb > 1) {
@@ -281,7 +281,7 @@ void Combat() {
 				cout << Ghost[Ennemi]->getDefense() << endl;
 			}
 		}
-	} while (FightChoice != (1, 2, 3, 4));
+	} while (FightChoice != (1, 2, 3, 4)&&!FightAction);
 }
 
 

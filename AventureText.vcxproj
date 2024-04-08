@@ -130,12 +130,14 @@
     <ClCompile Include="Fantome.cpp" />
     <ClCompile Include="Inventaire.cpp" />
     <ClCompile Include="Personnage.cpp" />
+    <ClCompile Include="PersonnageTank.cpp" />
     <ClCompile Include="Sources.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fantome.h" />
     <ClInclude Include="Inventaire.h" />
     <ClInclude Include="Personnage.h" />
+    <ClInclude Include="PersonnageTank.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
