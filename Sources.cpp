@@ -79,7 +79,7 @@ void EndFloor() {
 void TxtRoom1() {
 	if (ActualFloor == 1) {
 		cout << "Votre equipe ouvre la porte de la premiere chambre du pallier, vous entrez en pataugeant dans l eau. Vous vous rendez compte que le liquide jaillit du sol de la piece quand tout d'un coup, la porte se claque derriere vous." << endl << "Un etre fait de plasma apparait ! " << endl;
-		//combat
+		Combat();
 	}
 	else if (ActualFloor == 2) {
 		cout << "Les chasseurs de fantomes entrent dans la piece, sur une table ils trouvent un paquet de gateaux." << endl;
