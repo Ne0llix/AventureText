@@ -118,3 +118,8 @@ void Fantome::setDescription(string d)
 {
 	description = d;
 }
+
+void Fantome::ReceiveAttack(int AttackValue)
+{
+	setHealth(getHealth() - (AttackValue - getDefense()));
+}

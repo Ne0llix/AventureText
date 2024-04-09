@@ -12,5 +12,6 @@ public :
 	bool getIsTankTrue();
 	void setIsTankTrue(bool t);
 
+	void PaquetUnite(bool TankTrue);
 };
 

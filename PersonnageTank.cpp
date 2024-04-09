@@ -13,3 +13,11 @@ void PersonnageTank::setIsTankTrue(bool t)
 {
     IsTankTrue = t;
 }
+
+void PersonnageTank::PaquetUnite(bool TankTrue)
+{
+    if (TankTrue) {
+
+    }
+    setIsTankTrue(false);
+}

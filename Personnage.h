@@ -13,6 +13,7 @@ private:
 	string role;
 	string gender;
 	int health;
+	int MaxHealth;
 	int attack;
 	int attackSpecial;
 	string attackSpecialName;
@@ -22,7 +23,7 @@ private:
 	string description;
 
 public:
-	Personnage(string n, string r, string g, int a, int s, int pv, int atk, int atkspe, string atkspen, int def, string d);
+	Personnage(string n, string r, string g, int a, int s, int pv,int MaxPv, int atk, int atkspe, string atkspen, int def, string d);
 
 	string getName();
 	void setName(string n);
@@ -42,6 +43,9 @@ public:
 	int getHealth();
 	void setHealth(int pv);
 
+	int getMaxHealth();
+	void setMaxHealth(int MaxPv);
+
 	int getAttack();
 	void setAttack(int atk);
 
@@ -56,5 +60,9 @@ public:
 
 	string getDescription();
 	void setDescription(string d);
+
+	void ReceiveHeal(int HealValue);
+
+	void ReceiveAttack(int AttackValue);
 };
 

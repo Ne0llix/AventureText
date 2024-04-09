@@ -1,6 +1,6 @@
 #include "Personnage.h"
 
-Personnage::Personnage(string n, string r, string g, int a, int s, int pv, int atk, int atkspe, string atkspen, int def, string d) {
+Personnage::Personnage(string n, string r, string g, int a, int s, int pv,int MaxPv, int atk, int atkspe, string atkspen, int def, string d) {
 	setName(n); 
 	setRole(r);
 	setGender(g);
@@ -74,6 +74,16 @@ void Personnage::setHealth(int pv)
 	health = pv;
 }
 
+int Personnage::getMaxHealth()
+{
+	return MaxHealth;
+}
+
+void Personnage::setMaxHealth(int MaxPv)
+{
+	MaxHealth = MaxPv;
+}
+
 int Personnage::getAttack()
 {
 	return attack;
@@ -122,4 +132,17 @@ string Personnage::getDescription()
 void Personnage::setDescription(string d)
 {
 	description = d;
+}
+
+void Personnage::ReceiveHeal(int HealValue)
+{
+	setHealth(getHealth() + HealValue);
+	if (getHealth() > getMaxHealth()) {
+		setHealth(getMaxHealth());
+	}
+}
+
+void Personnage::ReceiveAttack(int AttackValue)
+{
+	setHealth(getHealth() - (AttackValue - getDefense()));
 }

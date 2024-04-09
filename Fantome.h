@@ -46,4 +46,6 @@ public:
 
 	string getDescription();
 	void setDescription(string d);
+
+	void ReceiveAttack(int AttackValue);
 };
