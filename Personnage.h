@@ -24,6 +24,7 @@ private:
 
 public:
 	Personnage(string n, string r, string g, int a, int s, int pv,int MaxPv, int atk, int atkspe, string atkspen, int def, string d);
+	Personnage();
 
 	string getName();
 	void setName(string n);

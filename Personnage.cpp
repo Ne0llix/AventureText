@@ -7,11 +7,26 @@ Personnage::Personnage(string n, string r, string g, int a, int s, int pv,int Ma
 	setAge(a);
 	setSize(s);
 	setHealth(pv);
+	setMaxHealth(MaxPv);
 	setAttack(atk);
 	setAttackSpecial(atkspe);
 	setAttackSpecialName(atkspen);
 	setDefense(def);
 	setDescription(d);
+}
+Personnage::Personnage() {
+	setName("Jean");
+	setRole("Tank");
+	setGender("Homme");
+	setAge(28);
+	setSize(185);
+	setHealth(80);
+	setMaxHealth(80);
+	setAttack(70);
+	setAttackSpecial(105);
+	setAttackSpecialName("Paquet d'unite");
+	setDefense(108);
+	setDescription("Grand et musculeux, Jean est naturellement devenu le Tank du groupe.En quête d'ennemis puissants il est pret a se battre contre n'importe qui pour l'Unite.");
 }
 
 string Personnage::getName()

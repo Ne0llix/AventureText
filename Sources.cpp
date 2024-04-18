@@ -2,6 +2,7 @@
 #include "Personnage.h"
 #include "Fantome.h"
 #include "Inventaire.h"
+#include "PersonnageTank.h"
 #include <vector>
 
 using namespace std;
@@ -18,12 +19,12 @@ Inventaire i3("Paquet de Gateaux", 1, 30);
 Inventaire i4("Gateaux", 3, 10);
 Inventaire i5("Popcorn", 4, 10);
 
-Personnage p1("Jean", "Tank", "Homme", 28, 185, 80,80, 70, 105, "Paquet d'Unite", 100, "Grand et musculeux, Jean est naturellement devenu le Tank du groupe. En quête d'ennemis puissants il est pret a se battre contre n'importe qui pour l'Unite.");
+PersonnageTank pt1;
 Personnage p2("Remi", "Mage", "Homme", 40, 175, 90,90, 60, 90, "Moteur ireel", 100, "De taille moyenne, Remi se moque de l'Unité, dans l'église de l'Ireel, il est un element moteur du groupe grace a sa magie de force C++.");
 Personnage p3("Xavier", "Assassin", "Homme", 45, 175, 100,100, 70, 105, "Mise en scene", 60, "Discret et observateur, Xavier trouve son bonheur dans l'anthropologie et les reactions humaines, c'est tirant partie de ses qualites qu'il a appris a parfaire ses techniques de vol.");
 Personnage p4("Salim", "Barde", "Homme", 45, 180, 75,75, 60, 90, "Chant de destruction", 50, "Bien que n'aimant pas ce terme, Salim est un artiste dans l'ame, au dessin ou a l'ecriture il se passionne reellement. C'est donc logique qu'il soit devenu le barde du groupe.");
 
-Fantome f1("Fantome normal", 100, 50, 60, 20, "Ce fantome degouline de plasma, il ne semble pas tres fort mais vous ne le sous - estimez pas pour autant.Vous faites face a votre peur.");
+Fantome f1("Fantome normal", 100, 60, 60, 20, "Ce fantome degouline de plasma, il ne semble pas tres fort mais vous ne le sous - estimez pas pour autant.Vous faites face a votre peur.");
 Fantome f2("Fantome d'eau", 90, 60, 40, 40, "Ce fantome degouline de plasma et d'eau, il semble intangible. Vous vous demandez si vous seriez gluant ou mouille a son contact.");
 Fantome f3("Fantome de glace", 110, 60, 50, 50, "Ce fantome ne degouline pas, il semble comme fige dans la glace. Vous n'aimeriez qu'un de ses stalagtite vous tombe dessus.");
 Fantome f4("Fantome de feu", 100, 40, 70, 30, "Ce fantome semble bruler a chaudes flammes, sa chaleur vous empeche de vous apprcher plus. Vous vous sentez comme dans une vraie fournaise.");
@@ -45,7 +46,7 @@ int EnnemiNb;
 int Character;
 bool FightAction= false;
 int FightChoice;
-int ActualChara = 1;
+int ActualChara = 0;
 
 //Fonction Servant au joueur de passer à la suite du jeu
 void suite() {
@@ -58,6 +59,81 @@ void suite() {
 		}
 	}
 	continuer = "t";
+}
+void GestionInventaire() {
+	do {
+		cout << "Quelle item voulez-vous utiliser ? :" << endl;
+		for (int i = 0; i < Inventory.size(); i++) {
+			cout << i + 1 << "." << Inventory[i]->GetName() << " x" << Inventory[i]->GetNombre() << " " << Inventory[i]->GetSoin() << "PV" << "    ";
+
+		}
+		cout << Inventory.size() + 1 << "." << "ou plus pour revenir en arriere" << endl;
+		cin >> ChoosenItem;
+	} while (ChoosenItem < 1);
+
+
+
+	ChoosenItem -= 1;
+	if (ChoosenItem == Inventory.size()) {
+		FightAction = false;
+		return;
+	}
+	else if (Inventory[ChoosenItem]->GetNombre() <= 0) {
+		cout << "Vous n'avez plus assez de cet objet" << endl;
+		FightAction = false;
+		return;
+	}
+	else {
+		Inventory[ChoosenItem]->UseObject();
+		cout << "Vous avez utilise " << Inventory[ChoosenItem]->GetName() << " et avez recupere " << Inventory[ChoosenItem]->GetSoin() << "PV" << endl;
+		Chara[ActualChara]->ReceiveHeal(Inventory[ChoosenItem]->GetSoin());
+		FightAction = true;
+	}
+
+}
+void Combat() {
+	while (Ghost[0]->getHealth() > 0) {
+		do {
+			FightAction = false;
+			cout << "Un ennemi se dresse devant vous" << endl;
+			cout << "c'est au tour de " << Chara[ActualChara]->getName() << ", que souhaitez-vous faire ?" << endl;
+			cout << "1 : Attaque - 2 : Inventaire - 3 : Attaque Speciale - 4 : Informations" << endl;
+			cin >> FightChoice;
+			if (FightChoice == 1) {
+				cout << "Vous attaquez le fantome " << Ghost[0]->getElementType_ToString() << " ennemi" << endl;
+				cout << "il perd " <<Chara[ActualChara]->getAttack() - Ghost[0]->getDefense() << " pv"<<endl;
+				Ghost[0]->ReceiveAttack(Chara[ActualChara]->getAttack());
+				FightAction = true;
+			}
+			else if (FightChoice == 2) {
+				cout << "vous ouvrez votre inventaire" << endl;
+				GestionInventaire();
+			}
+			else if (FightChoice == 3) {
+				cout << "Vous faites votre attaque speciale ";
+			}
+			else if (FightChoice == 4) {
+				cout << "vous décidez d'en apprendre plus sur l'ennemi : " << endl;
+				cout << Ghost[Ennemi]->getElementType_ToString() << endl;
+				cout << Ghost[Ennemi]->getSize() << endl;
+				cout << Ghost[Ennemi]->getDescription() << endl;
+				cout << Ghost[Ennemi]->getHealth() << endl;
+				cout << Ghost[Ennemi]->getAttack() << endl;
+				cout << Ghost[Ennemi]->getDefense() << endl;
+			}
+		} while (FightChoice != (1, 2, 3, 4) && !FightAction);
+		if (ActualChara != 3) {
+			ActualChara += 1;
+		}
+		else {
+			ActualChara = 0;
+		}
+		for (int i = 0; i < 4; i++) {
+			Chara[i]->ReceiveAttack(Ghost[0]->getAttack());
+		}
+	}
+	cout << "Bravo, vous avez vaincu le fantome de type" << Ghost[0]->getElementType_ToString() << endl;
+
 }
 //Fonction pour lancer le texte de chaque fin d'étage
 void EndFloor() {
@@ -79,6 +155,7 @@ void EndFloor() {
 void TxtRoom1() {
 	if (ActualFloor == 1) {
 		cout << "Votre equipe ouvre la porte de la premiere chambre du pallier, vous entrez en pataugeant dans l eau. Vous vous rendez compte que le liquide jaillit du sol de la piece quand tout d'un coup, la porte se claque derriere vous." << endl << "Un etre fait de plasma apparait ! " << endl;
+		Ghost.push_back(&f1);
 		Combat();
 	}
 	else if (ActualFloor == 2) {
@@ -222,86 +299,13 @@ void Floor() {
 	EndFloor();
 }
 //L'inventaire de l'équipe en temps réel
-void GestionInventaire() {
-	do {
-		cout << "Quelle item voulez-vous utiliser ? :" << endl;
-		for (int i = 0; i < Inventory.size(); i++) {
-			cout << i + 1 << "." << Inventory[i]->GetName() << " x" << Inventory[i]->GetNombre() << " " << Inventory[i]->GetSoin() << "PV" << "    ";
-
-		}
-		cout << Inventory.size() + 1 << "." << "ou plus pour revenir en arriere" << endl;
-		cin >> ChoosenItem;
-	} while (ChoosenItem < 1);
 
 
 
-	ChoosenItem -= 1;
-	if (ChoosenItem == Inventory.size()) {
-		FightAction = false;
-		return;
-	}
-	else {
-		Inventory[ChoosenItem]->UseObject();
-		cout << "Vous avez utilise " << Inventory[ChoosenItem]->GetName() << " et avez recupere " << Inventory[ChoosenItem]->GetSoin() << "PV" << endl;
-		Chara[ActualChara]->ReceiveHeal(Inventory[ChoosenItem]->GetSoin());
-		FightAction = true;
-	}
-
-}
-
-void Combat() {
-	while (Ghost[0]->getHealth() > 0) {
-		do {
-			cout << "Un ennemi se dresse devant vous" << endl;
-			cout << "c'est au tour de " << Chara[Character]->getName() << ", que souhaitez-vous faire ?" << endl;
-			cout << "1 : Attaque - 2 : Inventaire - 3 : Attaque Speciale - 4 : Informations" << endl;
-			cin >> FightChoice;
-			if (FightChoice == 1) {
-				cout << "Vous attaquez le " << Ghost[Ennemi]->getElementType_ToString() << " ennemi" << endl;
-				cout << "il perd " << Ghost[Ennemi]->getHealth() + Ghost[Ennemi]->getHealth() - Chara[Character]->getAttack() << " pv";
-				Ghost[0]->ReceiveAttack(Chara[ActualChara]->getAttack());
-			}
-			else if (FightChoice == 2) {
-				cout << "vous ouvrez votre inventaire" << endl;
-				GestionInventaire();
-			}
-			else if (FightChoice == 3) {
-				cout << "Vous faites votre attaque speciale ";
-			}
-			else if (FightChoice == 4) {
-				if (EnnemiNb > 1) {
-					do {
-						cout << "Quel ennemi voulez-vous connaitre mieux ?" << endl;
-						cin >> Ennemi;
-					} while (Ennemi < 1 || Ennemi > EnnemiNb);
-				}
-				else {
-					cout << "vous décidez d'en apprendre plus sur l'ennemi : " << endl;
-					cout << Ghost[Ennemi]->getElementType_ToString() << endl;
-					cout << Ghost[Ennemi]->getSize() << endl;
-					cout << Ghost[Ennemi]->getDescription() << endl;
-					cout << Ghost[Ennemi]->getHealth() << endl;
-					cout << Ghost[Ennemi]->getAttack() << endl;
-					cout << Ghost[Ennemi]->getDefense() << endl;
-				}
-			}
-		} while (FightChoice != (1, 2, 3, 4) && !FightAction);
-		if (ActualChara != 4) {
-			ActualChara += 1;
-		}
-		else {
-			ActualChara = 1;
-		}
-		for (int i = 0; i < 4; i++) {
-			Chara[i]->ReceiveAttack(Ghost[0]->getAttack());
-		}
-	}
-	
-}
 
 
 int main() {
-	Chara.push_back(&p1);
+	Chara.push_back(&pt1);
 	Chara.push_back(&p2);
 	Chara.push_back(&p3);
 	Chara.push_back(&p4);
