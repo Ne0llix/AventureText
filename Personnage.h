@@ -21,9 +21,10 @@ private:
 	int age;
 	int size;
 	string description;
+	bool IsDead;
 
 public:
-	Personnage(string n, string r, string g, int a, int s, int pv,int MaxPv, int atk, int atkspe, string atkspen, int def, string d);
+	Personnage(string n, string r, string g, int a, int s, int pv,int MaxPv, int atk, int atkspe, string atkspen, int def, string d, bool ID);
 	Personnage();
 
 	string getName();
@@ -61,6 +62,9 @@ public:
 
 	string getDescription();
 	void setDescription(string d);
+
+	bool getIsDead();
+	void setIsDead(bool ID);
 
 	void ReceiveHeal(int HealValue);
 

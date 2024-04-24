@@ -19,13 +19,14 @@ class Fantome
 private:
 	Element elementType;
 	int health;
+	int MaxHealth;
 	int attack;
 	int defense;
 	int size;
 	string description;
 
 public:
-	Fantome(string e, int s, int pv, int atk, int def, string d);
+	Fantome(string e, int s, int pv, int Maxpv, int atk, int def, string d);
 
 	Element getElementType();
 	std::string getElementType_ToString();
@@ -37,6 +38,10 @@ public:
 
 	int getHealth();
 	void setHealth(int pv);
+
+	int getMaxHealth();
+	void setMaxHealth(int Maxpv);
+
 
 	int getAttack();
 	void setAttack(int atk);

@@ -1,9 +1,10 @@
 #include "Fantome.h"
 
-Fantome::Fantome(string e, int s, int pv, int atk, int def, string d) {
+Fantome::Fantome(string e, int s, int pv,int Maxpv, int atk, int def, string d) {
 	setElementType(e);
 	setSize(s);
 	setHealth(pv);
+	setMaxHealth(Maxpv);
 	setAttack(atk);
 	setDefense(def);
 	setDescription(d);
@@ -87,6 +88,16 @@ int Fantome::getHealth()
 void Fantome::setHealth(int pv)
 {
 	health = pv;
+}
+
+int Fantome::getMaxHealth()
+{
+	return MaxHealth;
+}
+
+void Fantome::setMaxHealth(int Maxpv)
+{
+	MaxHealth = Maxpv;
 }
 
 int Fantome::getAttack()

@@ -1,6 +1,6 @@
 #include "Personnage.h"
 
-Personnage::Personnage(string n, string r, string g, int a, int s, int pv,int MaxPv, int atk, int atkspe, string atkspen, int def, string d) {
+Personnage::Personnage(string n, string r, string g, int a, int s, int pv,int MaxPv, int atk, int atkspe, string atkspen, int def, string d, bool ID) {
 	setName(n); 
 	setRole(r);
 	setGender(g);
@@ -13,6 +13,7 @@ Personnage::Personnage(string n, string r, string g, int a, int s, int pv,int Ma
 	setAttackSpecialName(atkspen);
 	setDefense(def);
 	setDescription(d);
+	setIsDead(ID);
 }
 Personnage::Personnage() {
 	setName("Jean");
@@ -20,13 +21,14 @@ Personnage::Personnage() {
 	setGender("Homme");
 	setAge(28);
 	setSize(185);
-	setHealth(80);
-	setMaxHealth(80);
-	setAttack(70);
+	setHealth(110);
+	setMaxHealth(110);
+	setAttack(60);
 	setAttackSpecial(105);
 	setAttackSpecialName("Paquet d'unite");
-	setDefense(108);
+	setDefense(35);
 	setDescription("Grand et musculeux, Jean est naturellement devenu le Tank du groupe.En quête d'ennemis puissants il est pret a se battre contre n'importe qui pour l'Unite.");
+	setIsDead(false);
 }
 
 string Personnage::getName()
@@ -149,6 +151,16 @@ void Personnage::setDescription(string d)
 	description = d;
 }
 
+bool Personnage::getIsDead()
+{
+	return IsDead;
+}
+
+void Personnage::setIsDead(bool ID)
+{
+	IsDead = ID;
+}
+
 void Personnage::ReceiveHeal(int HealValue)
 {
 	setHealth(getHealth() + HealValue);
@@ -157,7 +169,13 @@ void Personnage::ReceiveHeal(int HealValue)
 	}
 }
 
-void Personnage::ReceiveAttack(int AttackValue)
+ void Personnage::ReceiveAttack(int AttackValue)
 {
-	setHealth(getHealth() - (AttackValue - getDefense()));
+	 if ((AttackValue - getDefense()) > 0) {
+		 setHealth(getHealth() - (AttackValue - getDefense()));
+	 }
+	 else {
+		 setHealth(getHealth());
+	 }
+	
 }
